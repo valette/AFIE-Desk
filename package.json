@@ -3,7 +3,7 @@
   "productName" : "AFIE-Desk",
   "description": "Anatomic and Functional imaging in education - powered by Desk",
   "license" : "CECILL-B",
-  "main": "source/staticView.js",
+  "main": "source/electronStaticView.js",
   "author": "Sebastien Valette <sebastien.valette@creatis.insa-lyon.fr> (http://www.creatis.insa-lyon.fr/~valette)",
   "version": "0.1.0",
   "dependencies": {},

@@ -1,12 +1,14 @@
 'use strict';
-/* global _ qx desk customViewHelper ThresholdHelper*/
+/* global _ qx desk async customViewHelper ThresholdHelper*/
 
 const dir = 'data/NeuroPeda_Light_2013';
 const anatFiles = {};
 const functionalMaps = {};
 
-var checkBoxColor = "moccasin";
-var thresholdColor = "cyan";
+var checkBoxColor = "#FFE4B5"; // mocasin
+var thresholdColor = "#00BFFF"; // DeepSkyBlue
+
+var loopToStatify = false;
 
 desk.FileSystem.traverse( dir, function ( file, callback ) {
 
@@ -74,7 +76,7 @@ desk.FileSystem.traverse( dir, function ( file, callback ) {
     const viewer = new desk.VolumeViewer();
     const meshViewer = new desk.SceneContainer();
     viewer.setCustomContainer( meshViewer );
-    const model = qx.data.marshal.Json.createModel( Object.keys( anatFiles ).sort() );
+
     var currentBoxes;
     var list = new qx.ui.form.List();
     list.setWidth( width );
@@ -144,5 +146,41 @@ desk.FileSystem.traverse( dir, function ( file, callback ) {
             }
         }
 
+    });
+
+    if ( !loopToStatify || desk.auto ) return;
+
+    var files = Object.keys ( anatFiles ).slice();
+
+    async.eachSeries( files, function ( file, callback ) {
+
+        var obj = anatFiles[ file ];
+        customViewHelper( obj.file, { sceneContainer : meshViewer, MPRContainer : viewer }, next );
+
+        function next ( err ) {
+            if ( !obj.maps ) {
+                setTimeout( callback, 1000 );
+                return;
+            }
+
+            async.eachSeries( Object.keys (obj.maps), function ( functionName, cb ) {
+
+                var helper = new ThresholdHelper( obj.maps[ functionName ] , {
+                        sceneContainer : meshViewer,
+                        MPRContainer : viewer }, function () {
+
+                            setTimeout( function () {
+                                helper.destroy();
+                                cb();
+                            }, 1000 );
+
+                    } );
+
+            }, callback )
+
+        }
+
+    }, function ( err ) {
+        alert ('all done');
     });
 });
