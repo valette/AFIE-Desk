@@ -1,0 +1,46 @@
+{
+  "name": "AFIE-Desk",
+  "productName" : "AFIE-Desk",
+  "description": "Anatomic and Functional imaging in education - powered by Desk",
+  "license" : "CECILL-B",
+  "main": "source/staticView.js",
+  "author": "Sebastien Valette <sebastien.valette@creatis.insa-lyon.fr> (http://www.creatis.insa-lyon.fr/~valette)",
+  "version": "0.1.0",
+  "dependencies": {},
+   "repository": {
+    "type": "git",
+    "url": "https://github.com/valette/AFIE-Desk"
+  },
+  "devDependencies": {
+    "electron-prebuilt": ">0.0.0",
+    "electron-packager": ">0.0.0"
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "scripts" : {
+    "start": "electron .",
+    "clean" : "rm -rf neuropeda-*",
+    "package" : "electron-packager ./ --all --asar.unpackDir=\"**/{content/code,content/script,content/script/init}\"",
+    "zipLinux" : "zip -r neuropeda-linux-x64.zip neuropeda-linux-x64",
+    "zipArmv7l" : "zip -r neuropeda-linux-armv7l.zip neuropeda-linux-armv7l",
+    "zipWindows" : "zip -r neuropeda-win32-x64.zip neuropeda-win32-x64",
+    "zipDarwin" : "zip -r neuropeda-darwin-x64.zip neuropeda-darwin-x64",
+    "zip" : "npm run zipLinux && npm run zipArmv7l && npm run zipWindows && npm run zipDarwin",
+    "build" : "npm run clean && npm run package && npm run zip"
+  },
+
+  "dataDirs" : {
+      "AFIE-Desk" : {
+          "path" : "./source",
+          "hidden" : true
+      }
+  },
+
+  "init" : [
+    "AFIE-Desk/customViewHelper.js",
+    "AFIE-Desk/ThresholdHelper.js"
+  ]
+
+}
