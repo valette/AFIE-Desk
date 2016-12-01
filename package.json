@@ -21,12 +21,12 @@
   },
   "scripts" : {
     "start": "electron .",
-    "clean" : "rm -rf neuropeda-*",
+    "clean" : "rm -rf AFIE-Desk-*",
     "package" : "electron-packager ./ --all --asar.unpackDir=\"**/{content/code,content/script,content/script/init}\"",
-    "zipLinux" : "zip -r neuropeda-linux-x64.zip neuropeda-linux-x64",
-    "zipArmv7l" : "zip -r neuropeda-linux-armv7l.zip neuropeda-linux-armv7l",
-    "zipWindows" : "zip -r neuropeda-win32-x64.zip neuropeda-win32-x64",
-    "zipDarwin" : "zip -r neuropeda-darwin-x64.zip neuropeda-darwin-x64",
+    "zipLinux" : "zip -r AFIE-Desk-linux-x64.zip AFIE-Desk-linux-x64",
+    "zipArmv7l" : "zip -r AFIE-Desk-linux-armv7l.zip AFIE-Desk-linux-armv7l",
+    "zipWindows" : "zip -r AFIE-Desk-win32-x64.zip AFIE-Desk-win32-x64",
+    "zipDarwin" : "zip -r AFIE-Desk-darwin-x64.zip AFIE-Desk-darwin-x64",
     "zip" : "npm run zipLinux && npm run zipArmv7l && npm run zipWindows && npm run zipDarwin",
     "build" : "npm run clean && npm run package && npm run zip"
   },
