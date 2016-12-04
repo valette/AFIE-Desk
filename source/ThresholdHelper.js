@@ -7,6 +7,8 @@ var ThresholdHelper = function( volume , options, callback ) {
     var sceneContainer = this.sceneContainer = options.sceneContainer;
     var opacitySlider, visibilityBox;
 
+    var relative = ( typeof options.relative ) !== 'undefined' ? options.relatuve : true;
+
     // colors
     var paletteSize = 2000;
     var red   = [];
@@ -58,7 +60,7 @@ var ThresholdHelper = function( volume , options, callback ) {
         this.meshes = meshes;
 
         var slider = this.slider = new qx.ui.form.Slider( 'horizontal');
-        var res = 256;
+        var res = 100;
         slider.setMaximum( res );
         slider.setToolTipText( 'Change threshold max' );
         slider.addListener( 'changeValue', function () {
@@ -80,11 +82,22 @@ var ThresholdHelper = function( volume , options, callback ) {
 
         function updateSlice( slice ) {
             var maxValue = min + range * slider.getValue() / ( res - 1 );
-            maxLabel.setValue('' + maxValue.toFixed( 2 ) );
             slice.material.uniforms.thresholdMax.value = maxValue;
             var minValue = min + range * slider2.getValue() / ( res - 1 );
             slice.material.uniforms.thresholdMin.value = minValue;
-            minLabel.setValue('' + minValue.toFixed( 2 ) );
+
+            if ( relative ) {
+
+                maxLabel.setValue( '' + slider.getValue() );
+                minLabel.setValue( '' + slider2.getValue() );
+
+            } else {
+
+                maxLabel.setValue('' + maxValue.toFixed( 2 ) );
+                minLabel.setValue('' + minValue.toFixed( 2 ) );
+
+            }
+
         }
 
 //        sceneContainer.add(slider, { left : 50, bottom : 20, width : "70%" } );
@@ -110,8 +123,9 @@ var ThresholdHelper = function( volume , options, callback ) {
         var min = bounds[ 0 ];
         var range = bounds[ 1 ] - min;
         multiplier *= 0.5 * volumeSlice.getScalarBounds()[ 1 ];
-        slider.setValue( res );
-        slider2.setValue( 0 );
+
+        slider2.setValue( typeof options.min !== 'undefined' ? options.min : 0 );
+        slider.setValue( typeof options.max !== 'undefined' ? options.max : res );
 
         if ( callback ) callback ( null );
     }
