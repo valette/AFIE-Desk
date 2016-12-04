@@ -16,7 +16,7 @@ var customViewHelper = function( brainFile, options, callback ) {
     meshViewer.removeAllMeshes();
     meshViewer.getControls().enabled = false;
 
-    viewer.addVolume( brainFile, { format : 0, label : "brain" }, after );
+    viewer.addVolume( brainFile, { format : 1, label : "brain" }, after );
     var brightnessContrastIcon;
 
     function after ( err, volume ) {

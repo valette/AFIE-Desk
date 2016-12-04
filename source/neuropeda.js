@@ -35,7 +35,7 @@ const mins = {
     fonc_vwfa : 34
 };
 
-var loopToStatify = true;
+var loopToStatify = false;
 
 desk.FileSystem.traverse( dir, function ( file, callback ) {
 
