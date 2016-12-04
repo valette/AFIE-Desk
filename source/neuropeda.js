@@ -5,10 +5,37 @@ const dir = 'data/NeuroPeda_Light_2013';
 const anatFiles = {};
 const functionalMaps = {};
 
-var checkBoxColor = "#FFE4B5"; // mocasin
-var thresholdColor = "#00BFFF"; // DeepSkyBlue
+const checkBoxColor = "#FFE4B5"; // mocasin
+const thresholdColor = "#00BFFF"; // DeepSkyBlue
 
-var loopToStatify = false;
+const setDefaultThresholdValues = false;
+
+const mins = {
+    fonctionMotriciteMainDroiteVersusGauche : 75,
+    fonctionMotriciteMainGaucheVersusDroite : 80,
+    fonctionVisionMouvements : 70,
+    fonctionVisionCouleurs : 75,
+    fonctionnelVisionCouleurs : 75,
+    fonctionSomatotopieAuriculairedroit : 80,
+    fonctionSomatotopieCoudedroit : 80,
+    fonctionSomatotopieIndexdroit : 80,
+    fonctionSomatotopieLangue : 80,
+    fonctionSomatotopiePieddroit : 80,
+    fonctionSomatotopiePoucedroit : 80,
+    fontionOlfactionCitron : 20,
+    fontionOlfactionFruit : 20,
+    fonctionLangagePlasticiteEcoutePhrase : 70,
+    fonctionLangagePlasticiteGenerationMots : 70,
+    fonctionLangagePlasticiteGenerationPhrase : 70,
+    fonctionRecompense_ArgentSupErotique : 62,
+    fonctionRecompense_ErotiqueSupArgent : 41,
+    fonctionRecompense_ErotiqueSupControle : 36,
+    fonctionRecompense_conjonctionargentETerotique : 43,
+    fonc_Rvwfa : 33,
+    fonc_vwfa : 34
+};
+
+var loopToStatify = true;
 
 desk.FileSystem.traverse( dir, function ( file, callback ) {
 
@@ -71,6 +98,7 @@ desk.FileSystem.traverse( dir, function ( file, callback ) {
             console.warn( 'map ' + mapFile.file + " was not matched to any patient");
         }
     }
+console.log(anatFiles);
 
     const width = 400;
     const viewer = new desk.VolumeViewer();
@@ -104,6 +132,7 @@ desk.FileSystem.traverse( dir, function ( file, callback ) {
                     box.setBackgroundColor( checkBoxColor );
                     helper = new ThresholdHelper( maps[ functionName ] , {
                         sceneContainer : meshViewer,
+                        min : setDefaultThresholdValues? mins[ functionName ] : undefined,
                         MPRContainer : viewer }, function () {
                             helper.container.setBackgroundColor( thresholdColor );
                             list.addAfter( helper.container, box );
@@ -176,7 +205,7 @@ desk.FileSystem.traverse( dir, function ( file, callback ) {
 
                     } );
 
-            }, callback )
+            }, callback );
 
         }
 
