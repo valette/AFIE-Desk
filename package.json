@@ -22,7 +22,7 @@
   "scripts" : {
     "start": "electron .",
     "clean" : "rm -rf AFIE-Desk-*",
-    "package" : "electron-packager ./ --all --asar.unpackDir=\"**/{content/code,content/script,content/script/init}\"",
+    "package" : "electron-packager ./ --all --asar.unpackDir=\"**/{content/code,content/AFIE-Desk}\"",
     "zipLinux" : "zip -r AFIE-Desk-linux-x64.zip AFIE-Desk-linux-x64",
     "zipArmv7l" : "zip -r AFIE-Desk-linux-armv7l.zip AFIE-Desk-linux-armv7l",
     "zipWindows" : "zip -r AFIE-Desk-win32-x64.zip AFIE-Desk-win32-x64",
