@@ -270,7 +270,7 @@ desk.FileSystem.traverse( dir, function ( file, callback ) {
 
                 async.eachSeries( Object.keys (obj.maps), function ( functionName, cb ) {
 
-                    var helper = new ThresholdHelper( obj.maps[ functionName ] , {
+                    var helper = new ThresholdHelper( obj.maps[ functionName ].file , {
                             sceneContainer : meshViewer,
                             MPRContainer : viewer }, function () {
 
