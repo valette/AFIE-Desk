@@ -12,7 +12,7 @@
     "url": "https://github.com/valette/AFIE-Desk"
   },
   "devDependencies": {
-    "electron-prebuilt": ">0.0.0",
+    "electron": ">0.0.0",
     "electron-packager": ">0.0.0"
   },
   "optionalDependencies": {},
@@ -24,10 +24,12 @@
     "clean" : "rm -rf AFIE-Desk-*",
     "package" : "electron-packager ./ --all --asar.unpackDir=\"**/{content/code,content/AFIE-Desk}\"",
     "zipLinux" : "zip -r AFIE-Desk-linux-x64.zip AFIE-Desk-linux-x64",
+    "zipLinux32" : "zip -r AFIE-Desk-linux-ia32.zip AFIE-Desk-linux-ia32",
     "zipArmv7l" : "zip -r AFIE-Desk-linux-armv7l.zip AFIE-Desk-linux-armv7l",
     "zipWindows" : "zip -r AFIE-Desk-win32-x64.zip AFIE-Desk-win32-x64",
+    "zipWindows32" : "zip -r AFIE-Desk-win32-ia32.zip AFIE-Desk-win32-ia32",
     "zipDarwin" : "zip -r AFIE-Desk-darwin-x64.zip AFIE-Desk-darwin-x64",
-    "zip" : "npm run zipLinux && npm run zipArmv7l && npm run zipWindows && npm run zipDarwin",
+    "zip" : "npm run zipLinux && npm run zipLinux32 && npm run zipArmv7l && npm run zipWindows && npm run zipWindows32 && npm run zipDarwin",
     "build" : "npm run clean && npm run package && npm run zip"
   },
 
